@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a202c;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d3748;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a202c;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" style="stop-color:#4a5568;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#1a202c;stop-opacity:0" />
+    </radialGradient>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#4a5568" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow)"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+  <!-- 装饰性齿轮图标抽象线条 -->
+  <g stroke="#4a5568" stroke-width="1" opacity="0.08" fill="none">
+    <circle cx="1400" cy="150" r="40"/>
+    <circle cx="1400" cy="150" r="30"/>
+    <circle cx="1400" cy="150" r="20"/>
+    <line x1="1360" y1="150" x2="1340" y2="150"/>
+    <line x1="1440" y1="150" x2="1460" y2="150"/>
+    <line x1="1400" y1="110" x2="1400" y2="90"/>
+    <line x1="1400" y1="190" x2="1400" y2="210"/>
+    <circle cx="200" cy="750" r="30"/>
+    <circle cx="200" cy="750" r="20"/>
+    <line x1="170" y1="750" x2="155" y2="750"/>
+    <line x1="230" y1="750" x2="245" y2="750"/>
+    <line x1="200" y1="720" x2="200" y2="705"/>
+    <line x1="200" y1="780" x2="200" y2="795"/>
+  </g>
+</svg>

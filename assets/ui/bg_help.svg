@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2a4365;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow1" cx="30%" cy="20%" r="40%">
+      <stop offset="0%" style="stop-color:#3182ce;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:0" />
+    </radialGradient>
+    <radialGradient id="glow2" cx="70%" cy="80%" r="35%">
+      <stop offset="0%" style="stop-color:#2b6cb0;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#1a365d;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#glow1)"/>
+  <rect width="1600" height="900" fill="url(#glow2)"/>
+  <!-- 问号装饰 -->
+  <g fill="none" stroke="#63b3ed" stroke-width="1.5" opacity="0.1">
+    <text x="200" y="200" font-size="180" font-family="serif" fill="#63b3ed" opacity="0.06">?</text>
+    <text x="1300" y="750" font-size="120" font-family="serif" fill="#63b3ed" opacity="0.06">?</text>
+  </g>
+  <!-- 书籍抽象线条 -->
+  <g stroke="#63b3ed" stroke-width="0.8" opacity="0.06" fill="none">
+    <rect x="1350" y="100" width="50" height="70" rx="3"/>
+    <line x1="1350" y1="110" x2="1400" y2="110"/>
+    <line x1="1350" y1="120" x2="1400" y2="120"/>
+    <line x1="1350" y1="130" x2="1400" y2="130"/>
+    <line x1="1350" y1="140" x2="1400" y2="140"/>
+    <rect x="200" y="700" width="60" height="80" rx="3"/>
+    <line x1="200" y1="715" x2="260" y2="715"/>
+    <line x1="200" y1="730" x2="260" y2="730"/>
+    <line x1="200" y1="745" x2="260" y2="745"/>
+  </g>
+  <!-- 星星装饰 -->
+  <g fill="#63b3ed" opacity="0.08">
+    <polygon points="800,100 805,115 820,115 808,125 812,140 800,130 788,140 792,125 780,115 795,115"/>
+    <polygon points="100,500 103,508 112,508 105,514 108,523 100,517 92,523 95,514 88,508 97,508"/>
+    <polygon points="1500,400 1503,408 1512,408 1505,414 1508,423 1500,417 1492,423 1495,414 1488,408 1497,408"/>
+  </g>
+</svg>

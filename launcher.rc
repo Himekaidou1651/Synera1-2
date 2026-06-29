@@ -1,0 +1,4 @@
+#include <windows.h>
+
+// 应用图标 - 从 assets/icons/launcher.ico 加载
+IDI_LAUNCHER ICON "assets/icons/launcher.ico"
