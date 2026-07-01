@@ -1,6 +1,6 @@
 /**
  * @file    Pathfinding.h
- * @brief   寻路系统，提供 BFS 与 A* 路径搜索算法
+ * @brief   寻路系统，提供 A* 路径搜索算法
  * @author  
  * @date    2026-06-24
  */
@@ -24,23 +24,10 @@ struct PathNode {
 
 /**
  * @class   Pathfinding
- * @brief   寻路系统，提供 BFS 和 A* 两种网格路径搜索算法
+ * @brief   寻路系统，提供 A* 网格路径搜索算法
  */
 class Pathfinding {
 public:
-    /**
-     * @brief  使用 BFS 寻找最短路径（适合均匀代价网格）
-     * @param  board    棋盘实例
-     * @param  startX   起点行坐标
-     * @param  startY   起点列坐标
-     * @param  targetX  目标行坐标
-     * @param  targetY  目标列坐标
-     * @return 从起点到目标的路径坐标列表（不含起点）
-     */
-    static std::vector<std::pair<int, int>> bfsPath(const Board& board, 
-                                                     int startX, int startY,
-                                                     int targetX, int targetY);
-    
     /**
      * @brief  使用 A* 算法寻找最优路径
      * @param  board    棋盘实例

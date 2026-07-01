@@ -38,61 +38,6 @@ std::vector<std::pair<int, int>> Pathfinding::getWalkableNeighbors(const Board& 
     return neighbors;
 }
 
-std::vector<std::pair<int, int>> Pathfinding::bfsPath(const Board& board,
-                                                      int startX, int startY,
-                                                      int targetX, int targetY) {
-    std::vector<std::pair<int, int>> path;
-    
-    if (!board.isValidPosition(startX, startY) || !board.isValidPosition(targetX, targetY)) {
-        return path;
-    }
-    
-    // 起点等于目标，无需寻路
-    if (startX == targetX && startY == targetY) {
-        return path;
-    }
-    
-    std::queue<std::pair<int, int>> queue;
-    std::unordered_set<int> visited;  // 使用 x * BOARD_N + y 作为哈希键
-    std::vector<std::pair<int, int>> parentMap;
-    
-    auto hashPos = [](int x, int y) { return x * BOARD_N + y; };
-    
-    queue.push({startX, startY});
-    visited.insert(hashPos(startX, startY));
-    parentMap.resize(BOARD_M * BOARD_N, {-1, -1});
-    
-    while (!queue.empty()) {
-        auto [x, y] = queue.front();
-        queue.pop();
-        
-        if (x == targetX && y == targetY) {
-            // 回溯构建路径
-            int cx = targetX, cy = targetY;
-            while (cx != startX || cy != startY) {
-                path.push_back({cx, cy});
-                auto [px, py] = parentMap[hashPos(cx, cy)];
-                cx = px;
-                cy = py;
-            }
-            std::reverse(path.begin(), path.end());
-            return path;
-        }
-        
-        auto neighbors = getWalkableNeighbors(board, x, y);
-        for (auto [nx, ny] : neighbors) {
-            int hash = hashPos(nx, ny);
-            if (visited.find(hash) == visited.end()) {
-                visited.insert(hash);
-                parentMap[hash] = {x, y};
-                queue.push({nx, ny});
-            }
-        }
-    }
-    
-    return path;  // 无路径可达
-}
-
 std::vector<std::pair<int, int>> Pathfinding::astarPath(const Board& board,
                                                         int startX, int startY,
                                                         int targetX, int targetY) {

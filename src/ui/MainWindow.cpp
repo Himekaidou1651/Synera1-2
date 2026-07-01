@@ -344,7 +344,7 @@ void MainWindow::setupUI() {
     menuLayout->addWidget(menuTitleLabel);
 
     // 副标题
-    QLabel *menuSubtitleLabel = new QLabel("20260522");
+    QLabel *menuSubtitleLabel = new QLabel("20260701");
     menuSubtitleLabel->setAlignment(Qt::AlignCenter);
     menuSubtitleLabel->setStyleSheet("QLabel { font-size: 14px; color: #bdc3c7; margin-bottom: 20px; }");
     menuLayout->addWidget(menuSubtitleLabel);

@@ -1189,12 +1189,41 @@ void Game::rebuildEnemyUnitsFromBoard() {
 
 void Game::clearAllState() {
     board_.clear();
-    player_.resetRound();
-    player_.getBench().clear();
-    player_.getEquipmentTable().clear();
-    enemyPlayer_.getBench().clear();
-    enemyPlayer_.getEquipmentTable().clear();
     enemyUnits_.clear();
+
+    // 彻底重建双方玩家（与 initialize() 一致，确保无残留状态）
+    player_ = Player();
+    enemyPlayer_ = Player();
+
+    // 重置商店（清除旧商店数据和装备槽）
+    shop_.reset();
+    enemyShop_.reset();
+
+    // 清除战斗日志和 AI 日志
+    battleLog_.clear();
+    aiBehaviorLog_.clear();
+    aiIntentMap_.clear();
+
+    // 重置战斗动画状态
+    currentCombatStep_ = CombatStep::None;
+    combatEnemyIdx_ = 0;
+    combatPlayerIdx_ = 0;
+    combatBattleRound_ = 0;
+    roundRobinIsEnemy_ = true;
+    combatPlayerSnap_.clear();
+
+    // 重置状态机和攻击顺序管理器
+    stateMachineManager_.resetAll();
+    attackOrderManager_.clear();
+
+    // 重置杂项战斗变量
+    combatKillGold_ = 0;
+    combatKilledCount_ = 0;
+    equipDropAnimPending_ = false;
+    ultimateUsedName_.clear();
+    ultimateUsedChar_.clear();
+    ultimateUsedX_ = -1;
+    ultimateUsedY_ = -1;
 }
 
 const std::vector<std::shared_ptr<Unit>>& Game::getEnemyUnits() const {

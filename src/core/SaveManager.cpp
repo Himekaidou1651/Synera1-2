@@ -220,17 +220,12 @@ bool SaveManager::loadGame(Game &game, const std::string &filename) {
         game.setWinStreak(winStreak);
         game.setLossStreak(lossStreak);
 
-        // ========== 读取我方数据 ==========
+        // ========== 全面清理旧状态，确保从干净状态加载 ==========
+        game.clearAllState();
+
         Player &player = game.getPlayer();
         Player &enemyPlayer = game.getEnemyPlayer();
         Board &board = game.getBoard();
-
-        board.clear();
-        player.resetRound();
-        player.getBench().clear();
-        player.getEquipmentTable().clear();
-        enemyPlayer.getBench().clear();
-        enemyPlayer.getEquipmentTable().clear();
 
         if (!readPlayerState(in, player)) return false;
 

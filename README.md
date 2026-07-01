@@ -1,6 +1,6 @@
 # Synera: Synergy Auto-Arena
 
-> 一个基于 **Qt6** 和 **C++17** 的自走棋风格策略游戏
+> 一个基于 **Qt6** 和 **C++17** 的自走棋风格策略游戏 20260701
 
 ---
 
@@ -60,7 +60,7 @@ Synera2026/
 │   ├── combat/                    #   战斗系统层
 │   │   ├── StateMachine.cpp/h     #     单位状态机（状态转换/事件驱动）
 │   │   ├── Skill.cpp/h            #     技能系统（主动/被动/终极/触发）
-│   │   ├── Pathfinding.cpp/h      #     寻路系统（BFS + A* 双算法）
+│   │   ├── Pathfinding.cpp/h      #     寻路系统（A* 算法）
 │   │   └── Targeting.cpp/h        #     索敌系统（多策略/优先级/范围判定）
 │   │
 │   ├── units/                     #   角色派生类（9名角色）
@@ -127,7 +127,7 @@ Synera2026/
 | 文件夹 | 说明 |
 |--------|------|
 | `src/core/` | 游戏核心逻辑：棋盘、备战区、单位基类、玩家属性、商店、AI、敌人生成 |
-| `src/combat/` | 战斗子系统：状态机驱动回合、BFS/A\* 寻路、多策略索敌、技能多态 |
+| `src/combat/` | 战斗子系统：状态机驱动回合、A\* 寻路、多策略索敌、技能多态 |
 | `src/units/` | 9 名角色派生类 + 工厂模式，各角色独有攻击范围偏移表和符卡技能 |
 | `src/ui/` | Qt6 Widgets 图形界面：主窗口、棋盘渲染、商店面板、战斗日志、统计图表、音乐播放 |
 | `assets/` | 所有图片、音效、字体、UI 素材资源；`ulti/` 按角色分子目录存放大招特效 |
@@ -148,7 +148,7 @@ Synera2026/
 | **`Board`** | `Board.h/cpp` | 8×8 棋盘。管理单位放置/移动/移除/占用查询；提供 `isPlayerHalf()` / `isEnemyHalf()` 半场判定；`getUnitsForOwner()` 按归属获取所有单位；底层为 `vector<vector<shared_ptr<Unit>>>` |
 | **`Bench`** | `Bench.h/cpp` | 备战区（8 槽位）。管理单位添加/移除/交换/合成；`combineUnits` 实现 3 合 1 升星 |
 | **`Player`** | `Player.h/cpp` | 玩家实体。管理血量/金币/等级/经验/人口上限；持有 `Bench` 和全局装备表 `equipmentTable_`（`list<Equipment>`）；提供装备增删查改 API |
-| **`Game`** | `Game.h/cpp` | 游戏主控制器。管理回合循环（准备→战斗→结算）；逐步战斗动画推进（`CombatStep` 枚举）；敌方波次生成与 AI 行动调度；存档/读档（序列化棋盘/备战区/装备表等全部状态）；战斗结算（扣血/金币/连胜连败） |
+| **`Game`** | `Game.h/cpp` | 游戏主控制器。管理回合循环（准备→战斗→结算）；逐步战斗动画推进（`CombatStep` 枚举）；敌方波次生成与 AI 行动调度；存档/读档（加载前全面清理旧状态，序列化棋盘/备战区/装备表等全部状态）；战斗结算（扣血/金币/连胜连败） |
 | **`Shop`** | `Shop.h/cpp` | 商店系统。提供 5 招募位 + 3 装备槽位；`refresh()` 生成新单位/装备；`buyUnit()` / `buyEquipment()` 购买逻辑；装备合成树（3 同名同星 → 1 同名高星，属性等比×2叠加，支持暂存区+备战区+棋盘装备） |
 | **`EnemySpawner`** | `EnemySpawner.h/cpp` | 敌方生成器。加载 JSON 波次配置（`EnemyWaveConfig`）；`spawnWave(round)` 按轮次随机生成敌方阵容；属性每 3 轮 +20% |
 | **`EnemyAI`** | `EnemyAI.h/cpp` | 敌方 AI 决策。`makeDecision()` 为每个敌方单位决定移动/攻击/技能动作；`selectTarget()` 基于威胁度评估选择目标；A\* 寻路到攻击位（非目标格）；无路可走时绝境攻击 |
@@ -159,7 +159,7 @@ Synera2026/
 |------|------|----------|
 | **`StateMachine`** | `StateMachine.h/cpp` | 单位状态机。管理 `UnitState`（Idle/Ready/Attacking/Casting/Moving/Dead）之间的转换；事件驱动（`StateEvent`）；支持自定义转换规则（`addTransition`） |
 | **`Skill`** | `Skill.h/cpp` | 技能系统基类。支持 Active/Passive/Ultimate/Trigger 四种类型；`SkillEffect` 结构体定义伤害/治疗/增益/减益/眩晕/冰冻/击退/护盾等效果 |
-| **`Pathfinding`** | `Pathfinding.h/cpp` | 寻路系统。提供 **BFS** 和 **A\*** 双算法静态方法；`getWalkableNeighbors()` 获取 8 方向可行走邻格；支持棋盘占用碰撞检测 |
+| **`Pathfinding`** | `Pathfinding.h/cpp` | 寻路系统。提供 **A\*** 寻路算法静态方法；`getWalkableNeighbors()` 获取 8 方向可行走邻格；支持棋盘占用碰撞检测 |
 | **`TargetingSystem`** | `Targeting.h/cpp` | 索敌系统。支持 12 种索敌策略（Nearest/LowestHP/HighestHP/LowestATK/HighestATK/FrontRow/BackRow/MostDangerous 等）；多策略优先级组合（`TargetingPriority` + 权重）；支持普攻/大招不同范围判定 |
 
 ### 3.3 单位派生类（`src/units/`）
@@ -234,18 +234,12 @@ struct BattleLogEntry {
 
 ### 4.1 寻路算法（`Pathfinding`）
 
-提供 **BFS** 和 **A\*** 两种寻路算法：
-
-- **BFS（广度优先搜索）**：
-  - 从起点出发，逐层扩展 8 方向邻格（含对角线）
-  - 使用 `unordered_set<int>` 记录已访问节点（key = `x * BOARD_N + y`）
-  - 通过 `parentMap` 记录父节点，到达终点后回溯构建路径
-  - 时间复杂度 $O(M \times N)$，保证找到最短路径（网格等权）
+提供 **A\*** 寻路算法：
 
 - **A\*（启发式搜索）**：
   - 使用欧氏距离作为启发函数 $h(n)$：`hypot(dx, dy)`
   - 优先队列按 $f(n) = g(n) + h(n)$ 排序（`PathNode::getFCost()`）
-  - 比 BFS 更高效，适合大型网格
+  - 时间复杂度优于 BFS，适合大型网格
 
 - **碰撞检测**：`getWalkableNeighbors()` 检查 `board.isValidPosition()` 和 `!board.isOccupied()` 确保不穿过己方单位
 
